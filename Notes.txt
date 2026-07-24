@@ -1,1 +1,24 @@
-Tutotorial ollama https://www.google.com/search?q=imdb+datasets+for+python+jupyter+notebook+LLM+proejct+using+ollama&sca_esv=7653edd048582144&biw=1440&bih=748&sxsrf=APpeQntr0zaMwuALurlLioqy13JmCMoXGQ%3A1784896842378&ei=Sl1jauPfFryGw8cPv62SuQ8&ved=0ahUKEwjjrIDyquuVAxU8w_ACHb-WJPcQ4dUDCBA&uact=5&oq=imdb+datasets+for+python+jupyter+notebook+LLM+proejct+using+ollama&gs_lp=Egxnd3Mtd2l6LXNlcnAiQmltZGIgZGF0YXNldHMgZm9yIHB5dGhvbiBqdXB5dGVyIG5vdGVib29rIExMTSBwcm9lamN0IHVzaW5nIG9sbGFtYUi-GVDtCVjeGHABeAGQAQCYAZMBoAH4CqoBAzYuN7gBA8gBAPgBAZgCCKACgQbCAgoQABhHGNYEGLADwgIHECEYChigAcICBxAhGKsCGAqYAwDiAwUSATEgQIgGAZAGCJIHAzIuNqAH0kOyBwMxLja4B_0FwgcFMi40LjLIBw6ACAE&sclient=gws-wiz-serp#fpstate=ive&vld=cid:3e504d01-7ae3-48d1-b9ad-a0e3e67ff24a_91663324,vid:T8emnz9uaf0,st:2
+--> Dataset fomr IMDb datasets (non-commercial use dataset dumps) — titles, ratings, genres, crew. Good for cross-referencing.
+
+--> IMDB Kaggle Dataset
+Link: https://www.kaggle.com/datasets/sharmaabhi04/100k-movies-dataset
+# Install dependencies as needed:
+# pip install kagglehub[pandas-datasets]
+import kagglehub
+from kagglehub import KaggleDatasetAdapter
+
+# Set the path to the file you'd like to load
+file_path = ""
+
+# Load the latest version
+df = kagglehub.load_dataset(
+  KaggleDatasetAdapter.PANDAS,
+  "sharmaabhi04/100k-movies-dataset",
+  file_path,
+  # Provide any additional arguments like 
+  # sql_query or pandas_kwargs. See the 
+  # documenation for more information:
+  # https://github.com/Kaggle/kagglehub/blob/main/README.md#kaggledatasetadapterpandas
+)
+
+print("First 5 records:", df.head())
