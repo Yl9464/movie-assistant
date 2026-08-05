@@ -1,1 +1,11 @@
+--> Ollama
+ollama pull llama3.2:3b
+pip install ollama  
+pip install pandas    
 
+--> install IMDB Kaggle Dataset
+pip install kagglehub
+steps: 
+1. downlaod latest version
+2. extract csv file 
+3. load into pandas Datafram
