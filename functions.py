@@ -102,7 +102,6 @@ def generate_rag_answer(question, number_of_results=3):
         "metadata": metadatas,
         "distances": distances
     }
-
 def generate_response( prompt,temperature=TEMPERATURE):
     start_time = perf_counter()
 

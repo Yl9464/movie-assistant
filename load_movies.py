@@ -5,7 +5,6 @@ import kagglehub
 from functions import *
 from database import *
 from config import *
-
 # Download and load dataset
 # -----------------------------
 print("Downloading dataset...")
