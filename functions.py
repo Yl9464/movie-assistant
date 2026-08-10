@@ -1,10 +1,11 @@
+import logging
+
 import requests
-from embedings import create_embedding
+from sentence_transformers import SentenceTransformer
 from database import collection
 from prompts import create_grounded_prompt
 from config import *
 from ollama import chat
-from embedings import *
 from time import perf_counter
 
 #Temp
@@ -13,6 +14,7 @@ TEMPERATURE = 0.2
 EVALUATION_SCALE_MIN = 1
 EVALUATION_SCALE_MAX = 5
 
+embedding_model = SentenceTransformer("all-MiniLM-L6-v2")
 
 def check_ollama_running() -> bool:
     try:
@@ -45,33 +47,33 @@ def split_text_into_chunks(
 
     return chunks
 
-def retrieve_context(question, number_of_results=3):
+# retrieval function
+def retrieve_context(
+    question,
+    number_of_results=3
+):
+    logging.info("Entered retrieve_context()")
+    
     question_embedding = embedding_model.encode(
         question
     ).tolist()
 
-    results = collection.query(
-    query_embeddings=[question_embedding],
-    n_results=number_of_results
-    )
+    results = collection.query(query_embeddings=[question_embedding], n_results =number_of_results)
     documents = results["documents"][0]
     metadatas = results["metadatas"][0]
     distances = results["distances"][0]
 
     return documents, metadatas, distances
 
-
-# function to generate answer
-def generate_rag_answer(question,number_of_results=3):
-    print("user_question:", question)
-    
+def generate_rag_answer(question, number_of_results=3):
+    logging.info("Entered generate_rag_answer()")    
     documents, metadatas, distances = retrieve_context(
         question,
         number_of_results
     )
-
     context = "\n\n".join(documents)
-
+    
+    #Build Prompt
     prompt = f"""
     You are a movie recommendation assistant.
 
@@ -89,7 +91,7 @@ def generate_rag_answer(question,number_of_results=3):
 
     Answer:
     """
-
+    #send promt ot LLM
     response = chat(
         model="llama3.2:3b",
         messages=[
