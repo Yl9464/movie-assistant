@@ -18,32 +18,3 @@ if st.button("Search"):
     st.write("Summary: ", result["answer"]) #Display LLM resposne
     st.write("Metadata: ", result["metadata"])
     
-#interactive assistance
-# while True:
-#     question = input(
-#         "\nAsk a campus question or type exit: "
-#     )
-
-#     if question.lower().strip() in {
-#         "exit",
-#         "quit"
-#     }:
-#         print("Campus Assistant closed.")
-#         break
-
-#     result = generate_rag_answer(
-#         question,
-#         number_of_results=3
-#     )
-
-#     print("\nAssistant:")
-#     print(result["answer"])
-
-#     print("\nRetrieved Sources:")
-
-#     for index, document in enumerate(
-#         result["documents"]
-#     ):
-#         print(
-#             f"{index + 1}. {document}"
-#         )

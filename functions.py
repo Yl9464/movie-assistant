@@ -96,14 +96,13 @@ def generate_rag_answer(question, number_of_results=3):
     answer = response["message"]["content"]
 
     return {
-
         "question": question,
         "answer": answer,
         "documents": documents,
         "metadata": metadatas,
         "distances": distances
     }
-    
+
 def generate_response( prompt,temperature=TEMPERATURE):
     start_time = perf_counter()
 
