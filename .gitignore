@@ -9,6 +9,11 @@ __pycache__/
 *.py[cod]
 *.pyo
 *.pyc
+__pycache__
+/build
+/dist
+/streamlit_chatbox.egg-info
+temp*.py
 
 # ChromaDB
 chroma_db/
