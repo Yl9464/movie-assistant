@@ -1,27 +1,15 @@
 import logging
-
-import requests
 from sentence_transformers import SentenceTransformer
 from database import collection
-from prompts import create_grounded_prompt
-from config import *
 from ollama import chat
 from time import perf_counter
-
+from config import *
+from database import *
 #Temp
 TEMPERATURE = 0.2
 
 EVALUATION_SCALE_MIN = 1
 EVALUATION_SCALE_MAX = 5
-
-embedding_model = SentenceTransformer("all-MiniLM-L6-v2")
-
-def check_ollama_running() -> bool:
-    try:
-        requests.get("http://localhost:11434", timeout=2)
-        return True
-    except Exception:
-        return False
 
 #word based chunking
 def split_text_into_chunks(
@@ -108,6 +96,7 @@ def generate_rag_answer(question, number_of_results=3):
     answer = response["message"]["content"]
 
     return {
+
         "question": question,
         "answer": answer,
         "documents": documents,
