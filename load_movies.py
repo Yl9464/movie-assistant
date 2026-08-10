@@ -52,7 +52,6 @@ for index in movies_df.itertuples(index=True):
         })
         chunk_id += 1  # Increment after each chunk
         
-logging.basicConfig("Total CSV chunks:", len(all_chunks))
 print("Total CSV chunks:", len(all_chunks))
 
 # IDs and metadata creation
@@ -69,7 +68,7 @@ metadata = [
     for index in range(len(all_chunks))
 ]
 
-logging.basicConfig("Chunks created")
+
 print("\nChunks created with lengths:") 
 print("Ids =", len(chunk_ids), " || metadata: ", len(metadata))
 
@@ -84,10 +83,9 @@ batch_size = 5000
 total_documents = len(all_chunks)
 
 start_time = perf_counter()
+
 for start in range(0, total_documents, batch_size):
-    
-    logging.basicConfig("Entered batching loop\n")
-    
+  
     batch_start_time = perf_counter()
     end = min(start + batch_size, total_documents)
 
@@ -100,7 +98,7 @@ for start in range(0, total_documents, batch_size):
     batch_time = perf_counter() - batch_start_time
     progress = (end / total_documents) * 100
 
-    logging.basicConfig(
+    print(
         f"Batch {start//batch_size + 1}: "
         f"{start:,}-{end:,} "
         f"| {progress:.2f}% "
@@ -109,6 +107,6 @@ for start in range(0, total_documents, batch_size):
 
 total_time = perf_counter() - start_time
 
-logging.basicConfig(f"\nCompleted in {total_time:.2f} seconds")
-logging.basicConfig("Documents stored in ChromaDB.")
-logging.basicConfig("Collection size:", collection.count())
+print(f"\nCompleted in {total_time:.2f} seconds")
+print("Documents stored in ChromaDB.")
+print("Collection size:", collection.count())

@@ -54,6 +54,8 @@ venv\Scripts\activate
 
 ```bash
 pip install -r requirements.txt
+pip install kaggle sentence-transformers chromadb
+
 ```
 
 ### 4. Install and start Ollama
