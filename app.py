@@ -18,7 +18,7 @@ if st.button("Search"):
     st.write("Summary: ", result["answer"]) #Display LLM resposne
     st.write("Metadata: ", result["metadata"])
     
-#     # interactive assistance
+#interactive assistance
 # while True:
 #     question = input(
 #         "\nAsk a campus question or type exit: "
