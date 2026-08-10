@@ -124,3 +124,5 @@ def generate_response( prompt,temperature=TEMPERATURE):
         "text": response["message"]["content"],
         "response_time": elapsed_time
     }
+    
+    
