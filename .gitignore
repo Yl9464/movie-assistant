@@ -11,10 +11,9 @@ __pycache__/
 # ChromaDB
 chroma_db/
 
-# Datasets
+# Movie datasets
+data/*.csv
 *.csv
-*.parquet
-*.json
 
 # Downloaded/cache files
 .kaggle/
@@ -27,8 +26,20 @@ chroma_db/
 # macOS
 .DS_Store
 
+# VS Code
+.vscode/
+
 # Jupyter
 .ipynb_checkpoints/
 
 # Logs
 *.log
+
+# Python virtual environment
+venv/
+.venv/
+env/
+
+# Python cache
+__pycache__/
+*.py[cod]
