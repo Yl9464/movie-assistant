@@ -1,10 +1,10 @@
-import logging
 from sentence_transformers import SentenceTransformer
 from database import collection
-from ollama import chat
+from ollama import ResponseError, chat
 from time import perf_counter
 from config import *
 from database import *
+from config import *
 #Temp
 TEMPERATURE = 0.2
 
@@ -40,8 +40,7 @@ def retrieve_context(
     question,
     number_of_results=3
 ):
-    logging.info("Entered retrieve_context()")
-    
+ 
     question_embedding = embedding_model.encode(
         question
     ).tolist()
@@ -54,7 +53,7 @@ def retrieve_context(
     return documents, metadatas, distances
 
 def generate_rag_answer(question, number_of_results=3):
-    logging.info("Entered generate_rag_answer()")    
+       
     documents, metadatas, distances = retrieve_context(
         question,
         number_of_results
@@ -102,28 +101,39 @@ def generate_rag_answer(question, number_of_results=3):
         "metadata": metadatas,
         "distances": distances
     }
-    
-def generate_response( prompt,temperature=TEMPERATURE):
-    start_time = perf_counter()
 
-    response = chat(
-        model=OLLAMA_MODEL,
-        messages=[
-            {
-                "role": "user",
-                "content": prompt
-            }
-        ],
-        options={
-            "temperature": temperature
-        }
-    )
+def streamlit_response(
+    messages: list[dict[str, str]] #messages list of string dicts 
+) -> str:
+    """
+    Send the conversation to Ollama
+    and return the assistant response.
+    """
 
-    elapsed_time = perf_counter() - start_time
+    try:
+        response = chat(
+            model=OLLAMA_MODEL,
+            messages=messages,
+            options={
+                "temperature": 0.3,
+                "top_p": 0.9,
+            },
+        )
 
-    return {
-        "text": response["message"]["content"],
-        "response_time": elapsed_time
-    }
-    
-    
+        return response["message"]["content"]
+
+    except ResponseError as error:
+        if error.status_code == 404:
+            return (
+                f"The model '{OLLAMA_MODEL}' is not installed. "
+                f"Run this command in Terminal:\n\n"
+                f"`ollama pull {OLLAMA_MODEL}`"
+            )
+
+        return f"Ollama error: {error.error}"
+
+    except Exception:
+        return (
+            "I could not connect to Ollama. "
+            "Make sure Ollama is installed and running."
+        )

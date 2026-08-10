@@ -1,9 +1,9 @@
 import logging
 import streamlit as st
 from streamlit_chatbox import ChatBox
-from functions import generate_rag_answer
+from functions import *
 import streamlit as st
-from ollama import ResponseError, chat
+from config import *
 
 # ---------------------------------------------------------
 # Page configuration
@@ -13,67 +13,6 @@ st.set_page_config(
     page_icon="🎬",
     layout="centered",
 )
-
-# ---------------------------------------------------------
-# Configuration
-# ---------------------------------------------------------
-
-OLLAMA_MODEL = "llama3.2:3b"
-
-SYSTEM_PROMPT = """
-You are a helpful movie recommnedation Movie Recommendation Assistant.
-
-Your role is to recommend movies to the user, return the titles and assoicated 
-data in response to the inquiry. 
-
-
-Be clear, concise, and supportive.
-
-Do not invent movies or make alter movie information.
-
-If a question requires information that has not been provided,
-say that you do not have enough verified information.
-"""
-
-
-# ---------------------------------------------------------
-# Ollama function
-def generate_response(
-    messages: list[dict[str, str]]
-) -> str:
-    """
-    Send the conversation to Ollama
-    and return the assistant response.
-    """
-
-    try:
-        response = chat(
-            model=OLLAMA_MODEL,
-            messages=messages,
-            options={
-                "temperature": 0.3,
-                "top_p": 0.9,
-            },
-        )
-
-        return response["message"]["content"]
-
-    except ResponseError as error:
-        if error.status_code == 404:
-            return (
-                f"The model '{OLLAMA_MODEL}' is not installed. "
-                f"Run this command in Terminal:\n\n"
-                f"`ollama pull {OLLAMA_MODEL}`"
-            )
-
-        return f"Ollama error: {error.error}"
-
-    except Exception:
-        return (
-            "I could not connect to Ollama. "
-            "Make sure Ollama is installed and running."
-        )
-
 
 # ---------------------------------------------------------
 # Initialize conversation history
@@ -197,7 +136,7 @@ if question:
 
         with st.chat_message("assistant"):
             with st.spinner("Thinking..."):
-                answer = generate_response(
+                answer = streamlit_response(
                     model_messages
                 )
 
