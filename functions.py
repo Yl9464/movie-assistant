@@ -96,7 +96,6 @@ def generate_rag_answer(question, number_of_results=3):
     answer = response["message"]["content"]
 
     return {
-
         "question": question,
         "answer": answer,
         "documents": documents,
