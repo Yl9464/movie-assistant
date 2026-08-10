@@ -1,0 +1,34 @@
+# Virtual environment
+venv/
+.venv/
+env/
+
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+
+# ChromaDB
+chroma_db/
+
+# Datasets
+*.csv
+*.parquet
+*.json
+
+# Downloaded/cache files
+.kaggle/
+.cache/
+*.zip
+
+# Environment variables
+.env
+
+# macOS
+.DS_Store
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Logs
+*.log
