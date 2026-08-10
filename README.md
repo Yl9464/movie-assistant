@@ -34,7 +34,7 @@ Make sure you have these two files together in a project folder:
 
 ```
 movie-assistant/
-├── streamlit_app.py
+├── app.py
 └── requirements.txt
 ```
 
@@ -83,7 +83,7 @@ ollama serve
 From the project folder:
 
 ```bash
-streamlit run streamlit_app.py
+streamlit run app.py
 ```
 
 Streamlit will open the app in your browser at `http://localhost:8501`.
@@ -116,7 +116,7 @@ Streamlit will open the app in your browser at `http://localhost:8501`.
 
 ## Configuration
 
-You can adjust these constants near the top of `streamlit_app.py`:
+You can adjust these constants near the top of `app.py`:
 
 | Setting | Default | Description |
 |---|---|---|
@@ -156,7 +156,7 @@ Streamlit caches `@st.cache_resource` functions. Click **"Clear cache"** from St
 
 ```
 movie-assistant/
-├── streamlit_app.py     # Main Streamlit application
+├── app.py     # Main Streamlit application
 ├── requirements.txt      # Python dependencies
 ├── README.md              # This file
 └── chroma_db/             # Auto-created local vector store (persisted)
