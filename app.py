@@ -38,8 +38,6 @@ say that you do not have enough verified information.
 
 # ---------------------------------------------------------
 # Ollama function
-# ---------------------------------------------------------
-
 def generate_response(
     messages: list[dict[str, str]]
 ) -> str:
