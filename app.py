@@ -1,4 +1,3 @@
-import logging
 import streamlit as st
 from streamlit_chatbox import ChatBox
 from functions import *

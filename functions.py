@@ -137,3 +137,7 @@ def streamlit_response(
             "I could not connect to Ollama. "
             "Make sure Ollama is installed and running."
         )
+
+# def rag_testing(  # Define individual test case matching the RAG run
+
+# )
