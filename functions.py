@@ -5,11 +5,7 @@ from time import perf_counter
 from config import *
 from database import *
 from config import *
-#Temp
-TEMPERATURE = 0.2
 
-EVALUATION_SCALE_MIN = 1
-EVALUATION_SCALE_MAX = 5
 
 #word based chunking
 def split_text_into_chunks(
@@ -137,7 +133,3 @@ def streamlit_response(
             "I could not connect to Ollama. "
             "Make sure Ollama is installed and running."
         )
-
-# def rag_testing(  # Define individual test case matching the RAG run
-
-# )

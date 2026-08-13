@@ -1,7 +1,5 @@
 import streamlit as st
-from streamlit_chatbox import ChatBox
 from functions import *
-import streamlit as st
 from config import *
 
 # ---------------------------------------------------------
@@ -11,6 +9,17 @@ st.set_page_config(
     page_title="Movie Recommendation Assistant",
     page_icon="🎬",
     layout="centered",
+)
+# ---------------------------------------------------------
+# Load CSS
+# ---------------------------------------------------------
+
+with open("style.css", "r") as f:
+    css = f.read()
+
+st.markdown(
+    f"<style>{css}</style>",
+    unsafe_allow_html=True
 )
 
 # ---------------------------------------------------------

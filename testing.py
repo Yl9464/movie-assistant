@@ -17,12 +17,3 @@ for q in questions:
     print(test_case)
     print("-" * 60)
     
-# for document, metadata, distance in zip(
-#     documents,
-#     metadatas,
-#     distances
-# ):
-    # print(document)
-    # print(metadata)
-    # print(distance)
-    # print("-" * 60)

@@ -4,6 +4,7 @@ import kagglehub
 from functions import *
 from database import *
 from config import *
+
 # Download and load dataset
 # -----------------------------
 print("Downloading dataset...")
@@ -26,8 +27,7 @@ print(f"Loaded {len(movies_df)} movies.")
 all_chunks = []
 all_metadata = []
 
-
-chunk_id = 0  # Global chunk counter
+chunk_id = 0  #chunk counter
 
 for index in movies_df.itertuples(index=True):
 
@@ -78,15 +78,14 @@ print("Ids =", len(chunk_ids), " || metadata: ", len(metadata))
 
 from time import perf_counter
 
-batch_size = 5000
 total_documents = len(all_chunks)
 
 start_time = perf_counter()
 
-for start in range(0, total_documents, batch_size):
+for start in range(0, total_documents, BATCH_SIZE):
   
     batch_start_time = perf_counter()
-    end = min(start + batch_size, total_documents)
+    end = min(start + BATCH_SIZE, total_documents)
 
     collection.add(
         ids=chunk_ids[start:end],
@@ -98,7 +97,7 @@ for start in range(0, total_documents, batch_size):
     progress = (end / total_documents) * 100
 
     print(
-        f"Batch {start//batch_size + 1}: "
+        f"Batch {start//BATCH_SIZE + 1}: "
         f"{start:,}-{end:,} "
         f"| {progress:.2f}% "
         f"| Time: {batch_time:.2f}s"

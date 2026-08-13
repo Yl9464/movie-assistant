@@ -14,7 +14,6 @@ Do not invent movies or make alter movie information.
 If a question requires information that has not been provided,
 say that you do not have enough verified information.
 """
-TEMPERATURE = 0.2
 
 CHROMA_PATH = "./chroma_db"
 
